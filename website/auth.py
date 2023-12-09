@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
-from .models import User
+from .models import User, Recipe
 from . import db
 from flask_login import login_user, login_required, logout_user, current_user
 
@@ -47,7 +47,7 @@ def signup():
             new_user = User(email=email, firstname=firstname,password=password)
             db.session.add(new_user)
             db.session.commit()
-            login_user(user, remember=True)
+            login_user(new_user, remember=True)
             flash("Signup successful!", category="success")
             return redirect(url_for('views.create'))       
         

@@ -5,7 +5,7 @@ from apikey import apikey
 from langchain.llms import OpenAI
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain, SequentialChain
-from .models import Recipe
+from .models import Recipe, User
 from . import db 
 
 views = Blueprint('views', __name__)
@@ -17,8 +17,9 @@ def welcome():
 
 
 @views.route('/create', methods = ['POST', 'GET'])
+@login_required
 def create():
-    if request.method == ['POST']:
+    if request.method == 'POST':
         ingredients= request.form.get('ingredients')
         cuisine = request.form.get('cuisine')
                    
@@ -38,12 +39,12 @@ def create():
         sequential_chain = SequentialChain(chains=[title_chain,instructions_chain], input_variables=['ingredients','cuisine'], output_variables=['title','instructions'], verbose=True)
 
         #give response if there is an input
-        if ingredients: 
-            response = sequential_chain({'ingredients':ingredients, 'cuisine':cuisine})
-            new_recipe = Recipe(title= response['title'], instructions= response['instructions'], user_id=current_user.id )
-            db.session.add(new_recipe)
-            db.session.commit()
-            
+        
+        response = sequential_chain({'ingredients':ingredients, 'cuisine':cuisine})
+        new_recipe = Recipe(title= response['title'], instructions= response['instructions'], user_id=current_user.id )
+        db.session.add(new_recipe)
+        db.session.commit()
+        
         
     
     return render_template('create.html', user=current_user)
