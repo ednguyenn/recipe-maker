@@ -5,13 +5,13 @@
 <ul class="list-group list-group-flush" id="recipes">
   {% for recipe in user.recipes %}
   <li class="list-group-item">
-    {{ recipe.instructions }}
+    {{ recipe.title }}
   </li>
   {% endfor %}
 </ul>
 
-<form action="/create" method="post">
-    <h2>Welcome {{user.firstname}}, Let me know what ingredients you have and what cuisine you fancy</h2>
+<form action="/create" method="POST">
+    <h2>Welcome {{user.firstname}}, Lets create something</h2>
 
     <div class="form-group">
         <label for="ingredients">Ingredients:</label>
