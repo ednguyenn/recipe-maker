@@ -1,0 +1,14 @@
+{%extends "base.html"%} {%block title%} Welcome Page {%endblock%}
+{%block content%}
+<section style="text-align: center;">
+    <h2>Welcome to Your Culinary Haven</h2>
+    <p>Indulge in a world of flavors tailored just for you. As your recipe maker, I bring expertise to your kitchen, transforming your ingredients into culinary masterpieces.</p>
+
+    <img src="{{ url_for('static', filename='chef.jpg') }}" alt="Chef in action" style="max-width: 100%; height: auto; margin: 20px;">
+
+    <p>From family dinners to grand celebrations, we craft unforgettable dining experiences that cater to your unique taste and preferences.</p>
+
+    <button type="button" class="btn btn-primary" onclick="location.href='/login'">Login</button><br><br>
+    <button type="button" class="btn btn-primary" onclick="location.href='/signup'">Sign Up</button>
+</section>
+{%endblock%}

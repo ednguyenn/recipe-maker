@@ -1,0 +1,29 @@
+{%extends "base.html"%} {%block title%} Make a meal {%endblock%}
+{%block content%}
+
+<h1 align="center">Recipes</h1>
+<ul class="list-group list-group-flush" id="recipes">
+  {% for recipe in user.recipes %}
+  <li class="list-group-item">
+    {{ recipe.instructions }}
+  </li>
+  {% endfor %}
+</ul>
+
+<form action="/create" method="post">
+    <h2>Welcome {{user.firstname}}, Let me know what ingredients you have and what cuisine you fancy</h2>
+
+    <div class="form-group">
+        <label for="ingredients">Ingredients:</label>
+        <input type="ingredients" name="ingredients" id="ingredients" class="form-control" placeholder="Enter your ingredients" required>
+    </div>
+
+    <div class="form-group">
+        <label for="cuisine">Cuisine:</label>
+        <input type="cuisine" name="cuisine" id="cuisine" class="form-control" placeholder="Enter your cuisine" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Find recipe</button>
+</form>
+
+{%endblock%}
