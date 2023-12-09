@@ -14,7 +14,10 @@ views = Blueprint('views', __name__)
 def welcome():
     return render_template('welcome.html')
 
-
+@views.route('/collection')
+@login_required
+def collect():
+    return render_template('collection.html', user=current_user)
 
 @views.route('/create', methods = ['POST', 'GET'])
 @login_required
@@ -44,7 +47,7 @@ def create():
         new_recipe = Recipe(title= response['title'], instructions= response['instructions'], user_id=current_user.id )
         db.session.add(new_recipe)
         db.session.commit()
-        
+    else: new_recipe = None
         
     
-    return render_template('create.html', user=current_user)
+    return render_template('create.html', user=current_user, new_recipe=new_recipe)

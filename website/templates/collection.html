@@ -1,0 +1,14 @@
+{%extends "base.html"%} {%block title%} Collection {%endblock%}
+{%block content%}
+<h1 align="center"></h1>
+<ul class="list-group list-group-flush" id="recipes">
+    
+  {% for recipe in user.recipes %}
+    <li class="list-group-item">
+      <h2> -----------</h2>
+      {{ recipe.title }} 
+      <br>
+      {{ recipe.instructions}}
+    </li>
+  {% endfor %}
+{%endblock%}
